@@ -2,8 +2,8 @@ clear;
 
 load('RDMvector');
 
-%% 生成shape model RDM矩阵
-% 1-20：ET; 21-40:ST; 41-60:ENT; 61-80:SNT
+%% 鐢熸垚shape model RDM鐭╅樀
+% 1-20锛欵T; 21-40:ST; 41-60:ENT; 61-80:SNT
 shapemodelRDM = zeros(80, 80);
 shapemodelRDM(1:20, 21:40) = 1;
 shapemodelRDM(21:40, 1:20) = 1;
@@ -13,7 +13,7 @@ shapemodelRDM(21:40, 41:60) = 1;
 shapemodelRDM(41:60, 21:40) = 1;
 shapemodelRDM(41:60, 61:80) = 1;
 shapemodelRDM(61:80, 41:60) = 1;
-% 获取向量
+% 鑾峰彇鍚戦噺
 i = 0;
 for firststim = 1:79
     for secstim = (firststim + 1):80
@@ -29,22 +29,22 @@ end
 save('shapemodelRDM', 'shapemodelRDM');
 save('shapemodel_vector', 'shapemodel_vector');
 
-%% 求出矩阵与DCNN的RDM
+%% 姹傚嚭鐭╅樀涓嶥CNN鐨凴DM
 load('shapemodel_vector');
 cd('Shape');
-RDMshape_rn50 = [];
+RDMshape_alexnet = [];
 for i = 1:size(RDMvector, 2)
     A = shapemodel_vector(:, 1);
     B = double(RDMvector(:, i));
-    RDMshape_rn50(i, 1)= corr(A, B,'Type','Spearman','Rows','complete');
+    RDMshape_alexnet(i, 1)= corr(A, B,'Type','Spearman','Rows','complete');
 end
-save('RDMshape_rn50','RDMshape_rn50');
+save('RDMshape_alexnet','RDMshape_alexnet');
 
-%% 画图
+%% 鐢诲浘
 % trained_vs_nontrained-nontrained
 color=[0 0 0;105 105 105;135 206 250;255 165 0;255 99 71;255 0 0]/255;
 figure;
-b = bar(RDMshape_rn50, 'BarWidth', 0.8)
+b = bar(RDMshape_alexnet, 'BarWidth', 0.8)
 b.FaceColor = 'flat';
 for v=1:6
     b.CData(v,:) = color(v,:);
@@ -53,4 +53,4 @@ set(gca, 'YLim', [0 0.4])
 set(gca, 'YTick', 0:0.05:0.4)
 ylabel('Correlation');
 xlabel('Layer');
-saveas(gcf, 'RDMshape_rn50.png');
+saveas(gcf, 'RDMshape_alexnet.png');

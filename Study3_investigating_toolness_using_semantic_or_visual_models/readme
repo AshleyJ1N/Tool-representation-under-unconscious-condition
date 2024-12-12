@@ -1,1 +1,10 @@
+In this study we want to investigate the possibility of semantic information. 
+And we want to ues 2 pairs of DNNs to test this possibility.
+
+The first pair processes pure semantic or visual information, that is, BERT and Vision Transformer.
+And the second pair is the text or image encoder from CLIP model. 
+Because this model uses contrastive learning, so we think the encoders process less abstract semantic and visual information than BERT or Vision Transformer. 
+It is noted that CLIP provides different kinds of image encoders, and in this study, we chose vision transformer and resnet-50 as image encoders.
+
 We extracted the final layer of each model. And the analysis procedure is the same as study 2.
+P.S. some codes are the same as them in study1 and study2, so I didn't upload the duplicated codes.

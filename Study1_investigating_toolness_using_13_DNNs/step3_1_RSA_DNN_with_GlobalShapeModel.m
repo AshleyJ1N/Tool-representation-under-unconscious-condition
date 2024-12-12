@@ -1,8 +1,9 @@
 clear;
 
+% DSM from AlexNet
 load('RDMvector');
 
-%% 生成shape model RDM矩阵
+%% generate global shape model matrix
 % 1-20：ET; 21-40:ST; 41-60:ENT; 61-80:SNT
 shapemodelRDM = zeros(80, 80);
 shapemodelRDM(1:20, 21:40) = 1;
@@ -13,7 +14,7 @@ shapemodelRDM(21:40, 41:60) = 1;
 shapemodelRDM(41:60, 21:40) = 1;
 shapemodelRDM(41:60, 61:80) = 1;
 shapemodelRDM(61:80, 41:60) = 1;
-% 获取向量
+
 i = 0;
 for firststim = 1:79
     for secstim = (firststim + 1):80
@@ -29,7 +30,7 @@ end
 save('shapemodelRDM', 'shapemodelRDM');
 save('shapemodel_vector', 'shapemodel_vector');
 
-%% 求出矩阵与DCNN的RDM
+%% get DSM of global shape
 load('shapemodel_vector');
 cd('Shape');
 RDMshape_alexnet = [];
@@ -40,7 +41,7 @@ for i = 1:size(RDMvector, 2)
 end
 save('RDMshape_alexnet','RDMshape_alexnet');
 
-%% 画图
+%% figure
 % trained_vs_nontrained-nontrained
 color=[0 0 0;105 105 105;135 206 250;255 165 0;255 99 71;255 0 0]/255;
 figure;

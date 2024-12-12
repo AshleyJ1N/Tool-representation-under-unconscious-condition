@@ -1,9 +1,12 @@
+In order to confirm whether deep neural networks can be used in our study, for example, do they also think, like humans, shape is a lower level thing compared to toolness? 
+we conducted the first study.
+
 We used thirteen convolutional neural models. 
 
 First, the object images were used as inputs into the model to obtain response in different layers. 
-
-In this folder I’d like to use AlexNet as an example. 
-
+Here I’d like to use AlexNet as an example. 
 As is shown, we sampled the pooling layers and fully connected layers in the end of each big module, and calculated the RDM in each layer.
+
 Next, we correlated the RDM of each layer to the RDM of global shape model and toolness model. 
-Global shape model is built up according to the inherent shape properties while toolness model is built up according to the ratings from participants.
+Global shape model is built up according to the inherent shape properties while toolness model is built up according to the ratings from participants. 
+We required participants to rate the toolness of each stimuli according to the concept that ”Tool is the object that can transform people’s motor output into predictable mechanical actions”.

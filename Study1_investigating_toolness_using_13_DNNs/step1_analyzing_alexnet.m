@@ -1,16 +1,16 @@
 
 clear;
 s = pwd;
-cd('F:\TE_DCNN_RSA\DCNNs\stimuli');
+cd('F:\TE_DCNN_RSA\DCNNs\stimuli'); % this is where the stimuli images locate
 
-% ¼ÓÔØÄ£ĞÍ
+% loading model
 net = alexnet;
 net.Layers;
 inputSize = net.Layers(1).InputSize;
 
 for p = 1%:80
     
-    % ¶ÁÈ¡Í¼Æ¬£¬µ÷ÕûÍ¼Æ¬´óĞ¡
+    % input and resize
     pic = imread(['SHINEd_', mat2str(p), '_300' ,'.png']);
     pic = imresize(pic,inputSize(1:2));
     pic = cat(3, pic, pic, pic);
@@ -20,19 +20,20 @@ for p = 1%:80
     imgsize = imgsize(1:2);
     setGlobalimgsize(imgsize);
 
-    % »ñÈ¡Ã¿Ò»²ãµÄÌØÕ÷
+    % get features in different layers
     act5 = activations(net, pic, 'pool1');
     act9 = activations(net, pic, 'pool2');
     act16 = activations(net, pic, 'pool5');
     act17 = activations(net, pic, 'fc6');
     act20 = activations(net, pic, 'fc7');
     act23 = activations(net, pic, 'fc8');
-    
-    % ²é¿´Ä³Ò»²ãÈ«¾°
+
+    %% only a try, this part is not included in my program
+    % æŸ¥çœ‹æŸä¸€å±‚å…¨æ™¯
 %     showact(act5);
-    % ²é¿´Ä³Ò»Í¨µÀ
+    % æŸ¥çœ‹æŸä¸€é€šé“
 %     specificact(pic, act5, 1);
-    % ²é¿´×î´ó¼¤»î¼°ÆäË÷Òı
+    % æŸ¥çœ‹æœ€å¤§æ¿€æ´»åŠå…¶ç´¢å¼•
 %     [maxvalue, row, col, depth] = maxact(pic, act16);
     
     layer{p, 1} = act5;
@@ -44,7 +45,7 @@ for p = 1%:80
 end
 
 cd(s);
-% % ±£´æ
+% % save
 % filename=strcat('AlexnetLayersOutput.mat');
 % save (filename, 'layer')
 
@@ -58,7 +59,7 @@ function x = getGlobalimgsize
     x = IMGSIZE;
 end
 
-% ¸Ã²ãÔÚÄ³Ò»²ãµÄÈ«¾°Õ¹Ê¾
+% è¯¥å±‚åœ¨æŸä¸€å±‚çš„å…¨æ™¯å±•ç¤º
 function showact(act)
     sz = size(act);
     act = reshape(act,[sz(1) sz(2) 1 sz(3)]);
@@ -66,7 +67,7 @@ function showact(act)
     imshow(I);
 end
 
-% ¸Ã²ãÔÚÄ³²ãÄ³Ò»¸öÍ¨µÀºÍÔ­Í¼µÄ¶Ô±ÈÕ¹Ê¾
+% è¯¥å±‚åœ¨æŸå±‚æŸä¸€ä¸ªé€šé“å’ŒåŸå›¾çš„å¯¹æ¯”å±•ç¤º
 function specificact(pic, act, channel)
     act1ch = act(:,:,channel);
     act1ch = mat2gray(act1ch);
@@ -76,7 +77,7 @@ function specificact(pic, act, channel)
     imshow(I);
 end
 
-% ¸Ã²ã×î´óµÄ¼¤»îÍ¨µÀ
+% è¯¥å±‚æœ€å¤§çš„æ¿€æ´»é€šé“
 function [maxValue, maxRow, maxCol, maxDepth] = maxact(pic, act)
     [maxValue,maxValueIndex] = max(act(:));
     [maxRow, maxCol, maxDepth] = ind2sub(size(act), maxValueIndex);

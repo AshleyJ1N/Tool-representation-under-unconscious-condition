@@ -1,1 +1,8 @@
-We utilize 3 types of ResNet-50 with shape, texture or dual bias as was reported in a conference paper.
+We utilize 3 types of ResNet-50. 
+They have the totally same structure, but have different training materials, so they have different bias. 
+
+The first one(IN) is trained based on ImageNet, and it is regarded to have texture bias. 
+The second one(SIN) is trained based on stylized imagenet, and it is regarded to have texture bias. 
+The final one(SININ) is trained based on both of them, and it have dual bias.
+
+In this folder I would only present the coding example of IN, codes of the other two model are the same as this one.

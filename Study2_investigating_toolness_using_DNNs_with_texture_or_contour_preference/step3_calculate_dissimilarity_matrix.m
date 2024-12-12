@@ -6,14 +6,14 @@ i=0;
 for firststim=1:79
     for secstim=(firststim+1):80
         i=i+1;
-        stimpair_Order(i,1)=i;  %Åä¶Ô´Ì¼¤µÄË³Ğò
-        stimpair_Order(i,2)=firststim;  %µÚÒ»ÕÅÍ¼±àºÅ
-        stimpair_Order(i,3)=secstim;  %µÚ¶şÕÅÍ¼µÄ±àºÅ
+        stimpair_Order(i,1)=i;  %é…å¯¹åˆºæ¿€çš„é¡ºåº
+        stimpair_Order(i,2)=firststim;  %ç¬¬ä¸€å¼ å›¾ç¼–å·
+        stimpair_Order(i,3)=secstim;  %ç¬¬äºŒå¼ å›¾çš„ç¼–å·
     end
 end
 
 for L = 1:size(layer, 2)  
-    % Ã¿Ò»²ãÇó80ÕÅÍ¼Ö®¼äµÄÏà¹Ø,ĞÎ³É80x80µÄ²»ÏàËÆĞÔ¾ØÕó
+    % æ¯ä¸€å±‚æ±‚80å¼ å›¾ä¹‹é—´çš„ç›¸å…³,å½¢æˆ80x80çš„ä¸ç›¸ä¼¼æ€§çŸ©é˜µ
     for i = 1:size(stimpair_Order, 1)
         A = layer{stimpair_Order(i, 2), L};
         stim1 = reshape(A,size(A,1)*size(A,3)*size(A,2),1);
@@ -29,7 +29,7 @@ end
 save('RDM', 'RDM');
 save('RDMvector', 'RDMvector');
 
-%% »­Í¼
+%% ç”»å›¾
 for i = 1:size(layer, 2)
     load('RDM');
     imagesc(RDM{i});

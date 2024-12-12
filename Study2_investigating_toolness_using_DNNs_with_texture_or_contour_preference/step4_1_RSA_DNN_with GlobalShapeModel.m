@@ -1,9 +1,11 @@
+%% the funtion in this file is roughly the same as it in Study1 folder
+
 clear;
 
 load('RDMvector');
 
-%% 生成shape model RDM矩阵
-% 1-20：ET; 21-40:ST; 41-60:ENT; 61-80:SNT
+%% 鐢熸垚shape model RDM鐭╅樀
+% 1-20锛欵T; 21-40:ST; 41-60:ENT; 61-80:SNT
 shapemodelRDM = zeros(80, 80);
 shapemodelRDM(1:20, 21:40) = 1;
 shapemodelRDM(21:40, 1:20) = 1;
@@ -13,7 +15,7 @@ shapemodelRDM(21:40, 41:60) = 1;
 shapemodelRDM(41:60, 21:40) = 1;
 shapemodelRDM(41:60, 61:80) = 1;
 shapemodelRDM(61:80, 41:60) = 1;
-% 获取向量
+% 鑾峰彇鍚戦噺
 i = 0;
 for firststim = 1:79
     for secstim = (firststim + 1):80
@@ -29,7 +31,7 @@ end
 save('shapemodelRDM', 'shapemodelRDM');
 save('shapemodel_vector', 'shapemodel_vector');
 
-%% 求出矩阵与DCNN的RDM
+%% 姹傚嚭鐭╅樀涓嶥CNN鐨凴DM
 load('shapemodel_vector');
 cd('Shape');
 RDMshape_rn50 = [];
@@ -40,8 +42,7 @@ for i = 1:size(RDMvector, 2)
 end
 save('RDMshape_rn50','RDMshape_rn50');
 
-%% 画图
-% trained_vs_nontrained-nontrained
+%% 鐢诲浘
 color=[0 0 0;105 105 105;135 206 250;255 165 0;255 99 71;255 0 0]/255;
 figure;
 b = bar(RDMshape_rn50, 'BarWidth', 0.8)

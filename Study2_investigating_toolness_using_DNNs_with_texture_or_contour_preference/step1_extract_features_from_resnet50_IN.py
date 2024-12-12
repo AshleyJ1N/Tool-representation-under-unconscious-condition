@@ -11,6 +11,7 @@ torch.manual_seed(seed)
 if torch.cuda.is_available():
     torch.cuda.manual_seed_all(seed)
 
+# this is where the stimuli locate and path of the output folders
 path = 'F:\TE_DCNN_RSA\DCNNs\stimuli'
 output_path1 = r'F:\TE_DCNN_RSA\DCNNs\CLIP\RN50\extract_from_diff_layer\maxpool'
 output_path2 = r'F:\TE_DCNN_RSA\DCNNs\CLIP\RN50\extract_from_diff_layer\layer1'
@@ -19,7 +20,7 @@ output_path4 = r'F:\TE_DCNN_RSA\DCNNs\CLIP\RN50\extract_from_diff_layer\layer3'
 output_path5 = r'F:\TE_DCNN_RSA\DCNNs\CLIP\RN50\extract_from_diff_layer\avgpool'
 output_path6 = r'F:\TE_DCNN_RSA\DCNNs\CLIP\RN50\extract_from_diff_layer\attnpool'
 
-# 加载模型
+# loading model
 resnet50 = models.resnet50(pretrained=True)
 for name, layer in resnet50.named_children():
     print(name, layer)
@@ -104,7 +105,7 @@ with torch.no_grad():
     features6 = np.concatenate(features6)
 
 
-# 保存特征
+# save
 for i in range(0, 80):
     filename1 = f'maxpool_{i + 1}_feats.npy'
     filename2 = f'layer1_{i + 1}_feats.npy'

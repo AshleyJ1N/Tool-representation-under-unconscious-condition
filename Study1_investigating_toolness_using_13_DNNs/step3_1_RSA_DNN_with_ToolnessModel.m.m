@@ -12,7 +12,7 @@ load('RDMvector');
 toolnessRDM(:, 1:20) = TEvisible_toolquestionnaire(:, :);
 toolnessRDM(:, 21:41) = TECFS_toolquestionnaire(:, :);
 toolnessRDM(:, 42:61) = TEBM_toolquestionnaire(:, :);
-%% 算RDM
+%% calculate DSM from human participants
 for sub = 1:size(toolnessRDM, 2)
     i=0;
     for firststim=1:79
@@ -34,8 +34,8 @@ end
 save('RDMtoolness', 'RDMtoolness');
 save('RDMvector_toolness', 'RDMvector_toolness');
 
-%% 算RDM
-RDMtoolness_results_rn50 = [];
+%% RDM
+RDMtoolness_results_alexnet = [];
 cd('Toolness');
 for i = 1:size(toolnessRDM, 2)
     for j = 1:size(RDMvector, 2)

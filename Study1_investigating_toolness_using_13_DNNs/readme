@@ -1,0 +1,8 @@
+We used thirteen convolutional neural models. 
+
+First, the object images were used as inputs into the model to obtain response in different layers. 
+
+Here I’d like to use AlexNet as an example. 
+As is shown , we sampled the pooling layers and fully connected layers in the end of each big module, and calculated the RDM in each layer.
+Next, we correlated the RDM of each layer to the RDM of global shape model and toolness model. 
+Global shape model is built up according to the inherent shape properties while toolness model is built up according to the ratings from participants.

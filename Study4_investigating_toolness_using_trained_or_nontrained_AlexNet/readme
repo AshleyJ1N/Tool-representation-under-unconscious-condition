@@ -1,2 +1,8 @@
-Additionally, we further investigated the role of adding semantic tags plays in.
-We trained AlexNet with or without tools, and creating three kinds of models. That is, nontrained, tool-excluded and tool-included AlexNet.
+Additionally, we wonder why is BERT, the pure semantic model, least correlated with toolness, what lower the correlation between them? 
+One possibility we carry out is maybe it adds semantic tags. 
+So we further investigated the role of adding semantic tags plays in.
+
+We trained AlexNet with or without tools, and creating three kinds of models. 
+That is, nontrained, tool-excluded and tool-included AlexNet.
+
+In this folder I only uploaded the codes that is totally different from them in previous studies, in order to make things clearer, I hope this hleps😉.

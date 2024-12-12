@@ -1,7 +1,7 @@
 clear;
 addpath(pwd); 
 
-%% parameter
+%% here are some parameters I can modify
 type = "cfs";  % cfs or visible
 alpha = 0.05;
 sampling = 0.005;
@@ -20,7 +20,7 @@ elseif type == "visible"
 end
 filename=['study2_4vs', mat2str(layer), '_RSA_comparison', char(type), '.emf'];
 
-%% 画图
+%% figure
 maindir=pwd;
 alllayer=6;
 
@@ -234,7 +234,7 @@ for v=1:alllayer
     init3 = init3 + 0.003;
 end
 
-%0??-虚线
+%虚线
 plot(x,y,'LineStyle','--','Color',[0 0 0]);
 xlabel({'Onset time of the sliding window (ms)'});
 ylabel({'Correlation (Zscore)'});

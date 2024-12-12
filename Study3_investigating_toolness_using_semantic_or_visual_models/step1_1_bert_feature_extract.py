@@ -50,9 +50,9 @@ with torch.no_grad():
         output_path = rf'F:\TE_DCNN_RSA\DCNNs\sementic_vs_image\BERT\python\base\each_layer\layer{idx}'
         hidden_state=hidden_state.detach().numpy()
         print(hidden_state[0].shape)
-        # for i in range(0,80):
-        #     filename = f'text_{i + 1}_feats.mat'
-            # savemat(os.path.join(output_path, filename), {f'layer{idx}': hidden_state[i][-1]})
+        for i in range(0,80):
+            filename = f'text_{i + 1}_feats.mat'
+            savemat(os.path.join(output_path, filename), {f'layer{idx}': hidden_state[i][-1]})
 
 
 print('Word features saved.')

@@ -1,3 +1,4 @@
+% the funtion in this file in roughly the same as it in Study1 folder
 clear;
 
 load('TEvisible_toolquestionnaire_allsubjs');
@@ -9,18 +10,18 @@ load('RDMvector');
 toolnessRDM(:, 1:20) = TEvisible_toolquestionnaire(:, :);
 toolnessRDM(:, 21:41) = TECFS_toolquestionnaire(:, :);
 toolnessRDM(:, 42:61) = TEBM_toolquestionnaire(:, :);
-%% ��RDM
+%% 算RDM
 for sub = 1:size(toolnessRDM, 2)
     i=0;
     for firststim=1:79
         for secstim=(firststim+1):80
             i=i+1;
-            stimpair_Order(i,1)=i;  %��Դ̼���˳��?
-            stimpair_Order(i,2)=firststim;  %��һ��ͼ���?
-            stimpair_Order(i,3)=secstim;  %�ڶ���ͼ�ı��?
+            stimpair_Order(i,1)=i;  %锟斤拷源碳锟斤拷锟剿筹拷锟?
+            stimpair_Order(i,2)=firststim;  %锟斤拷一锟斤拷图锟斤拷锟?
+            stimpair_Order(i,3)=secstim;  %锟节讹拷锟斤拷图锟侥憋拷锟?
         end
     end
-    % ���RDM��RDMvector
+    % 锟斤拷锟絉DM锟斤拷RDMvector
     for i = 1:size(stimpair_Order, 1)
         A = toolnessRDM(stimpair_Order(i, 2), sub);
         B = toolnessRDM(stimpair_Order(i, 3), sub);
@@ -32,7 +33,7 @@ end
 save('RDMtoolness', 'RDMtoolness');
 save('RDMvector_toolness', 'RDMvector_toolness');
 
-%% ��RDM
+%% 算RDM
 RDMtoolness_results_rn50 = [];
 cd('Toolness');
 for i = 1:size(toolnessRDM, 2)
@@ -44,7 +45,7 @@ for i = 1:size(toolnessRDM, 2)
 end
 save('RDMtoolness_results_rn50','RDMtoolness_results_rn50');
 
-%% ��ͼ
+%% 画图
 color=[0 0 0;105 105 105;135 206 250;255 165 0;255 99 71;255 0 0]/255;
 avg = mean(RDMtoolness_results_rn50, 2);
 x = 1:6;

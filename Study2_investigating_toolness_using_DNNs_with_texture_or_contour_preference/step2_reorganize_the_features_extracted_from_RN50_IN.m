@@ -47,6 +47,6 @@ for p = 1:80
 end
 
 cd(s);
-% ±£´æ
+% save
 filename=strcat('resnet50LayersOutput.mat');
 save (filename, 'layer')

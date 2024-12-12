@@ -1,26 +1,28 @@
 clear;
 
+% ratings of toolness from participants
+% Tool is the object that can transfer human action into predictable moter output
 load('TEvisible_toolquestionnaire_allsubjs');
 load('TECFS_toolquestionnaire_allsubjs');
 load('TEBM_toolquestionnaire_allsubjs');
 
+% DSM calculated from AlexNet
 load('RDMvector');
 
 toolnessRDM(:, 1:20) = TEvisible_toolquestionnaire(:, :);
 toolnessRDM(:, 21:41) = TECFS_toolquestionnaire(:, :);
 toolnessRDM(:, 42:61) = TEBM_toolquestionnaire(:, :);
-%% ËãRDM
+%% ç®—RDM
 for sub = 1:size(toolnessRDM, 2)
     i=0;
     for firststim=1:79
         for secstim=(firststim+1):80
             i=i+1;
-            stimpair_Order(i,1)=i;  %ï¿½ï¿½Ô´Ì¼ï¿½ï¿½ï¿½Ë³ï¿½ï¿?
-            stimpair_Order(i,2)=firststim;  %ï¿½ï¿½Ò»ï¿½ï¿½Í¼ï¿½ï¿½ï¿?
-            stimpair_Order(i,3)=secstim;  %ï¿½Ú¶ï¿½ï¿½ï¿½Í¼ï¿½Ä±ï¿½ï¿?
+            stimpair_Order(i,1)=i;  
+            stimpair_Order(i,2)=firststim; 
+            stimpair_Order(i,3)=secstim;  
         end
     end
-    % ï¿½ï¿½ï¿½RDMï¿½ï¿½RDMvector
     for i = 1:size(stimpair_Order, 1)
         A = toolnessRDM(stimpair_Order(i, 2), sub);
         B = toolnessRDM(stimpair_Order(i, 3), sub);
@@ -32,21 +34,21 @@ end
 save('RDMtoolness', 'RDMtoolness');
 save('RDMvector_toolness', 'RDMvector_toolness');
 
-%% ËãRDM
+%% ç®—RDM
 RDMtoolness_results_rn50 = [];
 cd('Toolness');
 for i = 1:size(toolnessRDM, 2)
     for j = 1:size(RDMvector, 2)
         A = RDMvector_toolness(:, i);
         B = double(RDMvector(:, j));
-        RDMtoolness_results_rn50(j, i)= corr(A, B,'Type','Spearman','Rows','complete');
+        RDMtoolness_results_alexnet(j, i)= corr(A, B,'Type','Spearman','Rows','complete');
     end
 end
-save('RDMtoolness_results_rn50','RDMtoolness_results_rn50');
+save('RDMtoolness_results_alexnet','RDMtoolness_results_alexnet');
 
-%% »­Í¼
+%% ç”»å›¾
 color=[0 0 0;105 105 105;135 206 250;255 165 0;255 99 71;255 0 0]/255;
-avg = mean(RDMtoolness_results_rn50, 2);
+avg = mean(RDMtoolness_results_alexnet, 2);
 x = 1:6;
 b = bar(x, avg);
 set(b, 'BarWidth', 0.7);
@@ -55,12 +57,12 @@ b.FaceColor = 'flat';
 for v = 1:6
     b.CData(v,:) = color(v,:);
 end
-sub = length(RDMtoolness_results_rn50);
+sub = length(RDMtoolness_results_alexnet);
 for v = 1:6
-	SEM(v, 1) = std(RDMtoolness_results_rn50(v, :))/sqrt(sub);
+	SEM(v, 1) = std(RDMtoolness_results_alexnet(v, :))/sqrt(sub);
 end       
-ngroups = size(RDMtoolness_results_rn50, 2);
-nbars = size(RDMtoolness_results_rn50);
+ngroups = size(RDMtoolness_results_alexnet, 2);
+nbars = size(RDMtoolness_results_alexnet);
 for k = 1:6
     err = errorbar(x(k), avg(k, 1), SEM(k, 1), 'x', 'linewidth',2);
     set(err,'Color',color(k, :));
@@ -71,4 +73,4 @@ set(gca,'XTickLabel',{'1','2','3','4','5','6'});
 set(gca, 'YLim', [-0.08 0.14])
 set(gca, 'YTick', -0.08:0.02:0.14)
 ylabel('Correlation');
-saveas(gcf, 'RDMtoolness_results_rn50.png');
+saveas(gcf, 'RDMtoolness_results_alexnet.png');
